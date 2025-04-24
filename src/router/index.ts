@@ -1,8 +1,9 @@
 import {  createRouter, createWebHistory } from 'vue-router'
-import Home from '../pages/Home.vue'
-import About from '../pages/About.vue'
 import SignIn from '@/pages/SignIn.vue'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
+import Profile from '@/pages/Profile.vue'
+import Analytic from '@/pages/Analytic.vue'
+import { useSessionStore } from '@/stores/session'
 
 
 const routes = [
@@ -15,8 +16,8 @@ const routes = [
     path: '/dashboard', 
     component: DashboardLayout,
     children: [
-      { path: '/dashboard', component: Home },
-      {path:'/about' ,component:About}
+      { path: '', component: Profile},
+      { path: 'analytic', component: Analytic},
     ]
   },
 ]
@@ -26,4 +27,18 @@ const router = createRouter({
   routes,
 })
 
+
+router.beforeEach(async (to, _from, next) => {
+  const session = useSessionStore()
+ await session.fetchSession()
+
+  if (to.path === '/' && session.loggedIn) {
+    return next('/dashboard')
+  }
+  if (to.path !== '/' && !session.loggedIn) {
+    return next('/')
+  }
+
+  next()
+})
 export default router
