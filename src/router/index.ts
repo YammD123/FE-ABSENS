@@ -4,6 +4,7 @@ import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import Profile from '@/pages/Profile.vue'
 import Analytic from '@/pages/Analytic.vue'
 import { useSessionStore } from '@/stores/session'
+import AnalyticUserType from '@/pages/AnalyticUserType.vue'
 
 
 const routes = [
@@ -16,8 +17,9 @@ const routes = [
     path: '/dashboard', 
     component: DashboardLayout,
     children: [
-      { path: '', component: Profile},
-      { path: 'analytic', component: Analytic},
+      { path: '', component: Profile,meta:{KeepAlive:true}},
+      { path: 'analytic', component: Analytic,meta:{KeepAlive:true}},
+      {path:'analytic/:id',component:AnalyticUserType,meta:{KeepAlive:true}}
     ]
   },
 ]
@@ -30,7 +32,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, _from, next) => {
   const session = useSessionStore()
- await session.fetchSession()
+  await session.fetchSession()
 
   if (to.path === '/' && session.loggedIn) {
     return next('/dashboard')

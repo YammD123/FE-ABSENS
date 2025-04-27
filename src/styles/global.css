@@ -6,6 +6,9 @@
 body{
   background: whitesmoke;
 }
+.card {
+  max-width: 500px; /* Contoh batasan lebar */
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

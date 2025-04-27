@@ -6,7 +6,9 @@ import { Toaster } from 'vue-sonner'
 
 <template>
     <Toaster />
-    <RouterView/>
+    <KeepAlive>
+        <RouterView/>
+    </KeepAlive>
 </template>
 
 

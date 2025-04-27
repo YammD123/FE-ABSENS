@@ -4,20 +4,21 @@ import { Label } from '@/components/ui/label';
 import Auth from '@/composables/Auth.vue';
 import { Button } from '@/components/ui/button';
 import { ref, type Ref } from 'vue';
-import authForm from '@/actions/authForm';
 import { toast } from 'vue-sonner';
 import router from '@/router';
+import { useSessionStore } from '@/stores/session';
 
+const session = useSessionStore()
 const data : Ref<{email: string, password: string}> = ref({email: '', password: ''})
 
 
-async function submit() {
+async function handleLogin() {
     try {
         if (!data.value.email || !data.value.password) {
             toast.error('email dan password harus diisi')
             return
         }
-       await authForm.authFormSignIn(data.value)
+       await session.logIn(data.value.email,data.value.password)
        router.push('/dashboard')
         toast.success('berhasil login')
     } catch (error:any) {
@@ -36,7 +37,7 @@ async function submit() {
 
 <template>
     <Auth title="Sign In">
-        <form @submit.prevent="submit" class="flex flex-col gap-8">
+        <form @submit.prevent="handleLogin" class="flex flex-col gap-8">
             <div class="flex flex-col gap-2">
                 <Label >Email</Label>
                 <Input v-model="data.email" placeholder="Email" />
