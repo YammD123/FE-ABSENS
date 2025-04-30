@@ -6,6 +6,11 @@
 body{
   background: whitesmoke;
 }
+/* Sembunyikan tombol close default di pojok kanan atas */
+[data-state="open"] > button.absolute.right-4.top-4 {
+  display: none;
+}
+
 .card {
   max-width: 500px; /* Contoh batasan lebar */
 }

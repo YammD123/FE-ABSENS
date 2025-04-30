@@ -69,8 +69,8 @@ onMounted(async()=>{
 
 </script>
 <template>
-  <div class="py-8 flex flex-col gap-8">
-    <div class="max-w-full mx-auto px-4 grid md:grid-cols-2 gap-28">
+  <div class="py-8">
+    <div class="max-w-full mx-auto px-8 grid md:grid-cols-2 gap-10">
       <RouterLink 
       v-for="user in userType"
       :key="user.name"
@@ -92,8 +92,8 @@ onMounted(async()=>{
       <!-- chart lingkaran -->
       <apexchart
       type="donut"
-       width="400"
-        height="400"
+       width="500"
+        height="500"
         :options="chartOptions"
         :series="series"
       />

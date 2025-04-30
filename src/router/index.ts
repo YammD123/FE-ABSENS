@@ -5,6 +5,7 @@ import Profile from '@/pages/Profile.vue'
 import Analytic from '@/pages/Analytic.vue'
 import { useSessionStore } from '@/stores/session'
 import AnalyticUserType from '@/pages/AnalyticUserType.vue'
+import Absen from '@/pages/Absen.vue'
 
 
 const routes = [
@@ -19,7 +20,8 @@ const routes = [
     children: [
       { path: '', component: Profile,meta:{KeepAlive:true}},
       { path: 'analytic', component: Analytic,meta:{KeepAlive:true}},
-      {path:'analytic/:id',component:AnalyticUserType,meta:{KeepAlive:true}}
+      {path:'analytic/:id',component:AnalyticUserType,meta:{KeepAlive:true}},
+      {path:'absen',component: Absen,meta:{KeepAlive:true}},
     ]
   },
 ]
