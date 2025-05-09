@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore } from "@/stores/session";
-import { Calendar, ChartSpline, CircleUser, ClipboardPenLine, Search, Settings } from "lucide-vue-next";
+import { ChartSpline, CircleUser, ClipboardPenLine, Search, Settings } from "lucide-vue-next";
 import { useRoute } from "vue-router";
 
 const route = useRoute()

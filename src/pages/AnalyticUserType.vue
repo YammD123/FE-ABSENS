@@ -7,7 +7,7 @@ import DropDwn from "@/composables/DropDwn.vue";
 import Table from "@/composables/Table.vue";
 import { useUserStore } from "@/stores/user";
 import type { User } from "@/types/userType";
-import { SearchIcon} from "lucide-vue-next";
+import { Ellipsis, SearchIcon} from "lucide-vue-next";
 import { computed, onMounted, ref, type Ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -17,7 +17,7 @@ const userStore = useUserStore();
 const userDatas: Ref<User[]> = ref([]);
 const Search = ref("");
 const filteredUsers = computed(() =>
-  userStore.allDatas.filter((user) =>
+  userStore.allDatas.filter ((user) =>
     user.name.toLowerCase().includes(Search.value.toLowerCase())
   )
 );
@@ -50,6 +50,9 @@ onMounted(async () => {
           <TableCell class="py-2">{{ user.role }}</TableCell>
           <TableCell class="text-right py-2 pr-5">
             <DropDwn>
+              <template #trigger>
+                <Ellipsis class="text-gray-400 h-2 w-2" />
+              </template>
               <template #content>
                 <DeleteUser :user-id="user.id" :user-email="user.email"/>
               </template>

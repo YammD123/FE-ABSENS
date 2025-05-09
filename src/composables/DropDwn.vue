@@ -10,7 +10,7 @@ import { Ellipsis } from 'lucide-vue-next';
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger>
-            <Ellipsis class="h-4 w-4" />
+      <slot name="trigger"/>
     </DropdownMenuTrigger>
     <DropdownMenuContent>
         <slot name="content"/>

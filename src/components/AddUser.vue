@@ -2,7 +2,7 @@
 import Dialogg from '@/composables/Dialogg.vue';
 import { Button } from '@/components/ui/button'
 import { DialogDescription, DialogTitle } from './ui/dialog';
-import { Plus, Trash } from 'lucide-vue-next';
+import { Plus} from 'lucide-vue-next';
 import { useModalStore } from '@/stores/modal';
 import { useUserStore } from '@/stores/user';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { onMounted, reactive, ref } from 'vue';
+import { reactive } from 'vue';
 import { toast } from 'vue-sonner';
 
 const modalStore = useModalStore()
