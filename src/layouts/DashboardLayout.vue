@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useSessionStore } from "@/stores/session";
-import { ChartSpline, CircleUser, ClipboardPenLine, Search, Settings } from "lucide-vue-next";
+import { ChartSpline, CircleUser, ClipboardPenLine,} from "lucide-vue-next";
 import { useRoute } from "vue-router";
 
 const route = useRoute()
@@ -15,16 +15,6 @@ const items = [
     title: "Absen",
     url: "/dashboard/absen",
     icon: ClipboardPenLine,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
   },
 ];
 if (useSession.user?.roles === "ADMIN"){

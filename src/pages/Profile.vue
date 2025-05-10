@@ -1,22 +1,16 @@
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Sheet from "@/composables/Sheet.vue";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import router from "@/router";
 import { useSessionStore } from "@/stores/session";
 import { LogOut } from "lucide-vue-next";
 import { toast } from "vue-sonner";
+import { useProfileStore } from "@/stores/profile";
+import { onMounted } from "vue";
 
-
-
-//variables
 const session = useSessionStore()
-
-
-
-//functions
-const handleLogout = async ()=>{
+const useProfile = useProfileStore()
+const handleLogout = async () => {
   try {
     await session.logOut()
     toast.success('Logout Success')
@@ -25,7 +19,11 @@ const handleLogout = async ()=>{
     console.log(error)
   }
 }
+onMounted(async () => {
+  await useProfile.fetchProfile()
+})
 </script>
+
 <template>
   <div class="relative min-h-screen">
     <Button
@@ -33,30 +31,20 @@ const handleLogout = async ()=>{
       class="fixed top-4 right-4 z-10"
       @click="handleLogout"
     >
-      <LogOut class="w-4 h-4"/>
-      LogOut
+      <LogOut class="w-4 h-4 mr-2" />
+      Log Out
     </Button>
 
-    <div class="flex flex-col gap-4 p-4">
-      <Sheet
-        triger="Edit Profile"
-        decription="Make changes to your profile here. You can change your name, photo and password here."
-        title="Edit Profile"
-      >
-        <div class="px-3">
-          <div class="flex flex-col gap-2">
-            <Label>Email</Label>
-            <Input placeholder="Email" />
-          </div>
-          <div class="flex flex-col gap-2">
-            <Label>Password</Label>
-            <Input placeholder="Password" />
-          </div>
-        </div>
-        <template #close>
-          <Button>PP</Button>
-        </template>
-      </Sheet>
+    <div v-if="useProfile.data.user" class="flex flex-col items-center justify-center h-screen gap-4 text-center">
+      <Avatar class="w-24 h-24">
+        <AvatarImage :src="useProfile.data.avatar_image" alt="@unovue" />
+        <AvatarFallback>CN</AvatarFallback>
+      </Avatar>
+
+      <div>
+        <h2 class="text-xl font-semibold">{{ useProfile.data.user.name || 'Nama Pengguna' }}</h2>
+        <p class="text-gray-500">{{ useProfile.data.user.email || 'email@example.com' }}</p>
+      </div>
     </div>
   </div>
 </template>
